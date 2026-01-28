@@ -1,11 +1,11 @@
 import React from 'react';
 import { PRIORITY_CONFIG } from '../constants/componentConfig';
-import { type PriorityBadgeProps } from '../types';
+import { Priority, type PriorityBadgeProps } from '../types';
 
 
 export const PriorityBadge = React.memo(({ priority }: PriorityBadgeProps) => {
 
-  const config = PRIORITY_CONFIG[priority];
+  const config = PRIORITY_CONFIG[priority] || PRIORITY_CONFIG[Priority.LOW];
 
   return (
     <span className={`

@@ -12,10 +12,19 @@ This project is a high-performance, strictly typed Kanban board application desi
 - **Personal Productivity**: Organize daily tasks, personal goals, and side projects.
 - **Startup Task Tracking**: A lightweight yet powerful tool for simple project management without the bloat.
 
+## ♿ Accessibility
+
+We are committed to inclusivity. This board is fully keyboard and screen-reader accessible:
+- **Keyboard Navigation**: Full Tab support for all interactive elements.
+- **Focus Management**: Visible focus rings for buttons, cards, and inputs.
+- **Accessible Modal**: Focus trapping (via library/custom), ESC to close, and ARIA roles.
+- **Keyboard DnD**: Task cards can be moved using Space/Enter to lift and Arrow keys to move.
+- **Screen Readers**: ARIA labels on all icon-only buttons and form controls.
+
 ## 🚀 Key Features
 
 ### 1. Customizable Columns & Cards
-- **Dynamic Columns**: Create, rename, and delete columns to match your specific workflow (e.g., "Backlog", "In Review", "Done").
+- **Dynamic Columns**: Create, rename (Double-click or **Enter**), and delete columns to match your specific workflow.
 - **Rich Task Cards**: Tasks include titles, descriptions, priority levels, and visual labels.
 - **Modal Editing**: Full CRUD operations for tasks via an accessible, keyboard-friendly modal interface.
 

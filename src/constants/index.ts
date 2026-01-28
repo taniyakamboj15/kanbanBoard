@@ -100,6 +100,9 @@ export const UI_TEXT = {
     ADD_COLUMN: 'Add Column',
     SEARCH_PLACEHOLDER: 'Search tasks, labels...',
   },
+  MODAL: {
+    CLOSE: 'Close modal',
+  },
   COLUMN: {
     DELETE_TITLE: 'Delete Column',
     ADD_TASK: 'Add Task',

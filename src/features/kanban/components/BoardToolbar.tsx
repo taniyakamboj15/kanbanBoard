@@ -28,6 +28,7 @@ export const BoardToolbar = ({
           <div className="w-full md:w-80">
             <Input
               placeholder={UI_TEXT.BOARD.SEARCH_PLACEHOLDER}
+              aria-label="Search tasks"
               value={filterText}
               onChange={handleFilterChange}
               className="py-1.5"
@@ -49,6 +50,7 @@ export const BoardToolbar = ({
               options={SORT_OPTIONS}
               className="w-full"
               style={{ paddingLeft: '2.5rem' }}
+              aria-label="Sort tasks by"
             />
           </div>
           

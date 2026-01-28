@@ -134,17 +134,22 @@ export const Column = ({
     const dotBgClass = theme.text.replace('text-', 'bg-');
     
     return (
-      <h2 
+      <button 
         onDoubleClick={handleStartEdit}
-        className={`font-bold tracking-tight flex items-center gap-2.5 ${theme.text} cursor-text select-none text-base`}
-        title={UI_TEXT.COLUMN.TITLE_TOOLTIP}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') handleStartEdit();
+        }}
+       
+        className={`font-bold tracking-tight flex items-center gap-2.5 ${theme.text} cursor-pointer select-none text-base bg-transparent border-none p-0 text-left w-full focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-1 -ml-1`}
+        title={`${UI_TEXT.COLUMN.TITLE_TOOLTIP} (Double-click or Enter to edit)`}
+        aria-label={`Column title: ${title}. Press Enter to edit.`}
       >
         <span className={`w-3 h-3 rounded-full ${dotBgClass} shadow-[0_0_8px_rgba(0,0,0,0.1)]`} />
         {title}
         <span className={`text-[11px] px-2.5 py-0.5 rounded-full font-bold ml-1.5 opacity-90 ${theme.badge} shadow-sm border border-black/5 dark:border-white/5`}>
           {tasks.length}
         </span>
-      </h2>
+      </button>
     );
   };
   
@@ -175,8 +180,8 @@ export const Column = ({
         {isDeletable && (
           <button 
             onClick={handleDelete}
-            className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-full hover:bg-red-50 opacity-0 group-hover/column:opacity-100"
-            title={UI_TEXT.COLUMN.DELETE_TITLE}
+            className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-full hover:bg-red-50 opacity-0 group-hover/column:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            aria-label="Delete column"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

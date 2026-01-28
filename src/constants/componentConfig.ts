@@ -107,8 +107,8 @@ export const SORT_COMPARATORS: Record<string, SortComparator> = {
 
 export const SELECT_STYLES = {
   base: 'w-full pl-4 pr-10 py-2.5 bg-white dark:bg-slate-950 border rounded-xl shadow-sm appearance-none cursor-pointer font-medium text-sm transition-all duration-300 outline-none text-slate-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed',
-  error: 'border-red-300 focus:border-red-500 focus:ring-4 focus:ring-red-500/10',
-  normal: 'border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:focus:ring-blue-500/5',
+  error: 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-1',
+  normal: 'border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:focus:ring-blue-500',
 } as const;
 
 export const SORT_OPTIONS = [

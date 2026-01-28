@@ -48,18 +48,15 @@ export const TaskCardInner = React.memo(({
   
   return (
     <div 
-      onClick={onClick} 
-      style={style} 
-      className={cardClasses}
-      role="button"
-      tabIndex={onClick ? 0 : -1}
-      aria-label={`Task: ${task.title}`}
+      onClick={() => onClick && onClick()}
+      style={style}
       onKeyDown={(e) => {
         if (onClick && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault();
           onClick();
         }
       }}
+      className={`${cardClasses} focus:outline-none focus:ring-2 focus:ring-blue-500`}
     >
    
       <div className={gradientClasses} aria-hidden="true" />

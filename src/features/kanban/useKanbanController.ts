@@ -3,7 +3,9 @@ import {
   useSensor, 
   useSensors, 
   PointerSensor, 
+  KeyboardSensor,
 } from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { useBoard } from '../../hooks/useBoard';
 import { useOverdueTasks } from '../../hooks/useOverdueTasks';
@@ -39,6 +41,9 @@ export const useKanbanController = () => {
       activationConstraint: {
         distance: 5,
       },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
