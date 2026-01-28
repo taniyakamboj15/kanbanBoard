@@ -1,4 +1,4 @@
-import { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import { DragEndEvent, DragStartEvent, SensorDescriptor, SensorOptions } from '@dnd-kit/core';
 
 // ==========================================
 // LABEL TYPES
@@ -195,7 +195,7 @@ export interface BoardViewProps {
   tasksByColumn: { column: Column; tasks: Task[] }[];
   overdueTaskIds: Set<string>;
   activeTask: Task | null;
-  sensors: any; 
+  sensors: SensorDescriptor<SensorOptions>[]; 
   onDragStart: (event: DragStartEvent) => void;
   onDragEnd: (event: DragEndEvent) => void;
   onDragCancel: () => void;

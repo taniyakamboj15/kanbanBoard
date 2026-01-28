@@ -5,13 +5,12 @@ A modern, production-ready Kanban board built with React 18, TypeScript, Redux T
 ## 🚀 Features
 
 - **Drag & Drop**: Smooth task dragging within and across columns using @dnd-kit
-- **Task Management**: Full CRUD operations (Create, Read, Update, Delete)
-- **Dark Mode**: Premium "Deep Dark" theme with system preference detection and persistence
+- **Task Management**: Full CRUD operations with modal-based confirmation flows
+- **Dark Mode**: Premium "Dark" theme with system preference detection and persistence
 - **Labels**: Color-coded task categorization (Bug, Feature, Improvement, Documentation, Urgent)
 - **Deadlines**: Due date tracking with visual overdue indicators
 - **Auto-Save**: Optimized 500ms debounced persistence to localStorage
-- **Type-Safe**: Strict TypeScript with zero `any` types
-- **Production-Ready**: Senior-level architecture suitable for code review
+
 
 ## 📋 Tech Stack
 
@@ -54,8 +53,7 @@ src/
 ✅ **Features = Domain Logic** - All business rules  
 ✅ **Services = API Layer** - Backend-ready abstraction  
 ✅ **No if/else in JSX** - Object maps and early returns  
-✅ **Optimized Hooks** - Minimal use of `useCallback`/`useMemo` (only where performance-critical)  
-✅ **Auto-Save Debounce** - 500ms delay to prevent excessive storage writes  
+✅ **useCallback for handlers** - Performance optimized  
 ✅ **React Hook Form** - No useState per field  
 
 ## 🎯 Getting Started
