@@ -100,10 +100,13 @@ export const useKanbanController = () => {
 
   const handleDeleteTask = () => {
     if (!modalState.taskId) return;
-    if (window.confirm('Are you sure you want to delete this task?')) {
-      deleteTask(modalState.taskId);
-      handleCloseModal();
-    }
+    setModalState(prev => ({ ...prev, mode: 'deleteTask' }));
+  };
+
+  const confirmDeleteTask = () => {
+    if (!modalState.taskId) return;
+    deleteTask(modalState.taskId);
+    handleCloseModal();
   };
 
   // --- Drag & Drop ---
@@ -188,6 +191,7 @@ export const useKanbanController = () => {
     handleCreateTask,
     handleUpdateTask,
     handleDeleteTask,
+    confirmDeleteTask,
     onDragStart,
     onDragEnd,
     handleDragCancel,

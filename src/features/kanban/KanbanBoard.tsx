@@ -4,7 +4,6 @@ import { BoardToolbar } from './components/BoardToolbar';
 import { BoardView } from './components/BoardView';
 import { Modal } from '../../components/Modal';
 
-// Lazy load form components as they are only used in modals
 const TaskForm = lazy(() => import('../../components/TaskForm').then(m => ({ default: m.TaskForm })));
 const ColumnForm = lazy(() => import('../../components/ColumnForm').then(m => ({ default: m.ColumnForm })));
 
@@ -39,6 +38,7 @@ export const KanbanBoard = () => {
     handleDragCancel,
     updateColumn,
     deleteColumn,
+    confirmDeleteTask,
   } = useKanbanController();
 
   return (
@@ -112,6 +112,32 @@ export const KanbanBoard = () => {
         <Suspense fallback={<FormLoader />}>
           <ColumnForm onSubmit={handleCreateColumn} onCancel={handleCloseModal} />
         </Suspense>
+      </Modal>
+
+      <Modal
+        isOpen={modalState.mode === 'deleteTask'}
+        onClose={handleCloseModal}
+        title={UI_TEXT.TASK.DELETE_TITLE}
+      >
+        <div className="space-y-4">
+          <p className="text-gray-600 dark:text-gray-300">
+            Are you sure you want to delete this task? This action cannot be undone.
+          </p>
+          <div className="flex justify-end gap-3">
+             <button
+              onClick={handleCloseModal}
+              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              {UI_TEXT.GLOBAL.CANCEL}
+            </button>
+            <button
+              onClick={confirmDeleteTask}
+              className="px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors shadow-sm"
+            >
+              {UI_TEXT.GLOBAL.DELETE}
+            </button>
+          </div>
+        </div>
       </Modal>
     </>
   );

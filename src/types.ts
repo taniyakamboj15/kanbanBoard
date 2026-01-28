@@ -67,7 +67,7 @@ export interface TaskFormData {
 // MODAL TYPES
 // ==========================================
 
-export type ModalMode = 'create' | 'edit' | 'createColumn' | null;
+export type ModalMode = 'create' | 'edit' | 'createColumn' | 'deleteTask' | null;
 
 export interface ModalState {
   mode: ModalMode;
