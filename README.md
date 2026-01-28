@@ -1,266 +1,111 @@
-# Kanban Board - Production-Grade Task Management
+# Kanban Task Management Board: Taniya Kamboj
 
-A modern, production-ready Kanban board built with React 18, TypeScript, Redux Toolkit, and @dnd-kit. Features drag-and-drop task management with localStorage persistence.
+> A professional, production-ready Trello-like task management board for organizing work using drag-and-drop columns. Built with React 18, TypeScript, and Redux Toolkit.
 
-## 🚀 Features
+## 📋 Description
 
-- **Drag & Drop**: Smooth task dragging within and across columns using @dnd-kit
-- **Task Management**: Full CRUD operations with modal-based confirmation flows
-- **Dark Mode**: Premium "Dark" theme with system preference detection and persistence
-- **Labels**: Color-coded task categorization (Bug, Feature, Improvement, Documentation, Urgent)
-- **Deadlines**: Due date tracking with visual overdue indicators
-- **Auto-Save**: Optimized 500ms debounced persistence to localStorage
+This project is a high-performance, strictly typed Kanban board application designed to streamline task management. It mimics the intuitive interface of Trello while enforcing enterprise-grade engineering standards. The application features a robust drag-and-drop interface, real-time local persistence, and a highly customizable UI that adapts to user workflow.
 
+## 🎯 Use Cases
 
-## 📋 Tech Stack
+- **Agile Teams & Project Managers**: track sprint progress, manage backlogs, and visualize workflows.
+- **Personal Productivity**: Organize daily tasks, personal goals, and side projects.
+- **Startup Task Tracking**: A lightweight yet powerful tool for simple project management without the bloat.
 
-- **React 18** - UI library
-- **TypeScript** - Type safety (strict mode)
-- **Vite** - Build tool and dev server
-- **Redux Toolkit** - State management
-- **React Hook Form** - Form handling
-- **@dnd-kit** - Drag and drop
-- **React Router v7** - Routing
-- **Tailwind CSS** - Styling
+## 🚀 Key Features
 
-## 🏗️ Architecture
+### 1. Customizable Columns & Cards
+- **Dynamic Columns**: Create, rename, and delete columns to match your specific workflow (e.g., "Backlog", "In Review", "Done").
+- **Rich Task Cards**: Tasks include titles, descriptions, priority levels, and visual labels.
+- **Modal Editing**: Full CRUD operations for tasks via an accessible, keyboard-friendly modal interface.
 
-### Strict Folder Structure
+### 2. Drag-and-Drop Task Movement
+- **Smooth Interaction**: Powered by `@dnd-kit` for high-performance drag operations.
+- **Cross-Column Drops**: seamlessly move tasks between columns to update their status.
+- **Reorderable**: Drag items within a column to prioritize them.
 
-```
-src/
-├── components/         # Dumb UI components
-├── pages/             # Route-level components
-├── features/          # Business logic (Kanban)
-├── services/          # API abstraction (localStorage)
-├── router/            # Route configuration
-├── hooks/             # Reusable logic
-├── utils/             # Pure functions
-├── store/
-│   ├── reducers/
-│   └── store.ts
-├── layout/
-├── constants/
-├── error-boundary/
-├── types.d.ts
-├── app.tsx
-└── main.tsx
-```
+### 3. Task Deadlines & Labels
+- **Due Date Tracking**: Tasks display due dates with automatic visual cues for overdue items (red borders/highlighting).
+- **Categorization**: Use color-coded labels (Bug, Feature, Improvement, Urgent) for quick visual scanning.
+- **Priority Badges**: Distinct badges for Low, Medium, High, and Urgent priorities.
 
-### Design Principles
-
-✅ **Components = UI Only** - No business logic  
-✅ **Features = Domain Logic** - All business rules  
-✅ **Services = API Layer** - Backend-ready abstraction  
-✅ **No if/else in JSX** - Object maps and early returns  
-✅ **useCallback for handlers** - Performance optimized  
-✅ **React Hook Form** - No useState per field  
-
-## 🎯 Getting Started
-
-### Prerequisites
-
-- Node.js 16+ 
-- npm or yarn
-
-### Installation
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## 📖 Usage
-
-### Adding Tasks
-
-1. Click **"+ Add Task"** button
-2. Fill in title (required), description, due date, and labels
-3. Task will appear in the "To Do" column
-
-### Editing Tasks
-
-1. Click on any task card
-2. Modify fields in the modal
-3. Click **"Save Changes"** or **"Delete Task"**
-
-### Drag & Drop
-
-- **Within column**: Drag tasks up/down to reorder
-- **Across columns**: Drag tasks between To Do / In Progress / Done
-- Changes auto-save to localStorage
-
-### Labels
-
-- **BUG** (Red): Bug fixes
-- **FEATURE** (Blue): New features
-- **IMPROVEMENT** (Green): Enhancements
-- **DOCUMENTATION** (Purple): Documentation
-- **URGENT** (Orange): High priority
-
-### Overdue Tasks
-
-Tasks with past due dates show:
-- Red left border
-- Light red background
-- Automatic visual highlighting
-
-## 🔄 State Management
-
-### Redux Store Structure
-
-```typescript
-{
-  kanban: {
-    columns: Column[];
-    tasks: Task[];
-  }
-}
-```
-
-### Data Flow
-
-1. UI components dispatch actions
-2. Redux reducers update state
-3. State changes trigger re-render
-4. `useBoard` hook auto-saves to localStorage with 500ms debounce
-
-## 🛠️ Development Guidelines
-
-### Adding New Features
-
-1. **Types**: Add to `types.d.ts`
-2. **Constants**: Add to `constants/index.ts`
-3. **Redux**: Extend `kanbanSlice.ts`
-4. **Components**: Create in `components/`
-5. **Features**: Business logic in `features/`
-
-### Code Standards
-
-❌ **Prohibited**:
-- `any` types
-- Inline functions in JSX
-- if/else chains in components
-- Magic strings
-- Prop drilling
-
-✅ **Required**:
-- Strict TypeScript
-- Logical grouping of event handlers
-- `useMemo` for complex computations only
-- Object maps for conditionals
-- React Hook Form for forms
-
-## 🚀 Backend Migration Path
-
-The architecture is designed for seamless backend integration:
-
-### Step 1: Replace Storage Service
-
-```typescript
-// src/services/api.ts
-export const apiService = {
-  getTasks: () => fetch('/api/tasks'),
-  createTask: (task) => fetch('/api/tasks', { method: 'POST', body: JSON.stringify(task) }),
-  // ... other endpoints
-};
-```
-
-### Step 2: Add TanStack Query
-
-```bash
-npm install @tanstack/react-query
-```
-
-### Step 3: Update Hooks
-
-```typescript
-// src/hooks/useBoard.ts
-export const useBoard = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: apiService.getTasks,
-  });
-  // ... rest of implementation
-};
-```
-
-### Step 4: Add Authentication
-
-- Create `features/auth/`
-- Add auth slice to Redux
-- Protect routes in `router/index.tsx`
-
-## 📝 Project Structure Details
-
-### Types (`types.d.ts`)
-
-All TypeScript interfaces and enums centralized for consistency.
-
-### Constants (`constants/index.ts`)
-
-Label configs, default columns, storage keys - no magic strings.
-
-### Services (`services/storage.ts`)
-
-Backend-ready abstraction layer. Easy to swap localStorage with API calls.
-
-### Hooks (`hooks/`)
-
-- `useBoard.ts` - Task CRUD operations
-- `useOverdueTasks.ts` - Derived state for overdue detection
-
-### Features (`features/kanban/`)
-
-- `KanbanBoard.tsx` - Main orchestrator
-- `utils/dragHandlers.ts` - Drag-and-drop logic
-
-## 🐛 Troubleshooting
-
-### TypeScript Errors
-
-```bash
-npx tsc --noEmit
-```
-
-### Clear LocalStorage
-
-Open DevTools Console:
-```javascript
-localStorage.clear();
-location.reload();
-```
-
-### Port Already in Use
-
-Change port in `vite.config.ts`:
-```typescript
-export default defineConfig({
-  server: { port: 3001 },
-});
-```
-
-## 📄 License
-
-MIT
-
-## 👥 Contributing
-
-This is a demonstration project following strict architectural patterns suitable for:
-- Senior frontend interviews
-- Production code reviews
-- System design discussions
-- Team best practices reference
+### 4. Robust Persistence
+- **Local Storage**: State is automatically saved to the browser's local storage.
+- **Debounced Writes**: Optimized save logic (500ms debounce) prevents performance degradation during rapid updates.
+- **State Hydration**: The board instantly restores its previous state upon reloading the page.
 
 ---
 
-**Built with ❤️ following production-grade React + TypeScript best practices**
+## 💻 Technical Highlights
+
+This project was built with a strict focus on code quality and maintainability:
+
+- **Strict TypeScript**: 100% type safety with **Zero `any`** types allowed.
+- **Performance Optimized**: Usage of `React.memo` and strictly managed re-renders.
+- **Clean Architecture**: Separation of concerns between UI (Components), Logic (Hooks/Features), and State (Redux).
+- **Code Hygiene**: No `console.log` artifacts, unused imports, or magic strings.
+- **Dark Mode**: Fully implementing "Deep Dark" mode using Tailwind CSS.
+
+## 🛠️ Setup & Installation
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+- **Node.js**: Version 18 or higher recommended.
+- **npm**: Version 9 or higher.
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/taniyakamboj15/kanbanBoard.git
+cd board
+```
+
+### Step 2: Install Dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+### Step 3: Start Development Server
+```bash
+npm run dev
+```
+The application will launch at `http://localhost:5173`.
+
+### Step 4: Build for Production
+To create an optimized production build:
+```bash
+npm run build
+```
+The output will be generated in the `dist/` directory, ready for deployment.
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+├── components/         # Reusable UI components
+│   ├── Button.tsx     # Standardized button component
+│   ├── Modal.tsx      # accessible modal dialogs
+│   └── Input.tsx      # Form controls
+├── features/          # Feature-based modules
+│   └── kanban/        # Kanban domain logic
+│       ├── KanbanBoard.tsx       # Main board controller
+│       └── useKanbanController.ts # Logic hook
+├── hooks/             # Custom React hooks
+│   ├── useBoard.ts    # Board state operations
+│   └── useObverdueTasks.ts
+├── store/             # Global State (Redux)
+│   └── kanbanSlice.ts # State reducer definitions
+├── services/          # External Integrations
+│   └── storage.ts     # LocalStorage abstraction layer
+├── types.ts           # Shared TypeScript interfaces
+├── constants/         # Configuration & static text
+└── App.tsx            # Application root
+```
+
+## 🛡️ License
+
+This project is available for use under the MIT License.
