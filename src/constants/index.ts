@@ -92,7 +92,13 @@ export const UI_TEXT = {
     CANCEL: 'Cancel',
     DELETE: 'Delete',
     SAVE: 'Save',
+    SAVE_CHANGES: 'Save Changes',
     create: (item: string) => `Create ${item}`,
+    edit: (item: string) => `Edit ${item}`,
+  },
+  BOARD: {
+    ADD_COLUMN: 'Add Column',
+    SEARCH_PLACEHOLDER: 'Search tasks, labels...',
   },
   COLUMN: {
     DELETE_TITLE: 'Delete Column',

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { TaskCardInner } from './TaskCardInner';
@@ -23,11 +23,11 @@ export const TaskCard = React.memo(({ task, isOverdue, onClick }: TaskCardProps)
   });
 
 
-  const style = useMemo(() => ({
+  const style = {
     transform: CSS.Translate.toString(transform),
     transition,
     opacity: isDragging ? 0.3 : 1,
-  }), [transform, transition, isDragging]);
+  };
 
   const handleClick = useCallback(() => {
     onClick(task.id);

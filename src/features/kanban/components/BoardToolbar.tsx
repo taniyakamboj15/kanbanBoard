@@ -2,6 +2,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Select } from '@/components/Select';
 import { SORT_OPTIONS } from '@/constants/componentConfig';
+import { UI_TEXT } from '@/constants';
 import type { BoardToolbarProps, SortOption } from '@/types';
 
 export const BoardToolbar = ({
@@ -26,7 +27,7 @@ export const BoardToolbar = ({
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="w-full md:w-80">
             <Input
-              placeholder="Search tasks, labels..."
+              placeholder={UI_TEXT.BOARD.SEARCH_PLACEHOLDER}
               value={filterText}
               onChange={handleFilterChange}
               className="py-1.5"
@@ -62,7 +63,7 @@ export const BoardToolbar = ({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
               </svg>
             </span>
-            Add Column
+            {UI_TEXT.BOARD.ADD_COLUMN}
           </Button>
         </div>
       </div>

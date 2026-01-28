@@ -119,7 +119,10 @@ export const useKanbanController = () => {
     
     if (result.type === 'TASK') {
       moveTask(result.taskId, result.targetColumnId, result.newIndex);
-    } else if (result.type === 'COLUMN') {
+      return;
+    } 
+    
+    if (result.type === 'COLUMN') {
       reorderColumns(result.activeId, result.overId);
     }
   }, [boardState.tasks, boardState.columns, moveTask, reorderColumns]);

@@ -9,6 +9,7 @@ const TaskForm = lazy(() => import('../../components/TaskForm').then(m => ({ def
 const ColumnForm = lazy(() => import('../../components/ColumnForm').then(m => ({ default: m.ColumnForm })));
 
 import { FormLoader } from '../../components/Loader';
+import { UI_TEXT } from '@/constants';
 
 
 export const KanbanBoard = () => {
@@ -72,13 +73,13 @@ export const KanbanBoard = () => {
       <Modal
         isOpen={modalState.mode === 'create'}
         onClose={handleCloseModal}
-        title="Create New Task"
+        title={UI_TEXT.GLOBAL.create('New Task')}
       >
         <Suspense fallback={<FormLoader />}>
           <TaskForm 
             onSubmit={handleCreateTask} 
             onCancel={handleCloseModal} 
-            submitLabel="Create Task"
+            submitLabel={UI_TEXT.GLOBAL.create('Task')}
             defaultValues={modalState.defaultColumnId ? { columnId: modalState.defaultColumnId } : undefined}
           />
         </Suspense>
@@ -87,7 +88,7 @@ export const KanbanBoard = () => {
       <Modal
         isOpen={modalState.mode === 'edit'}
         onClose={handleCloseModal}
-        title="Edit Task"
+        title={UI_TEXT.GLOBAL.edit('Task')}
       >
         {editingTask && (
           <Suspense fallback={<FormLoader />}>
@@ -96,7 +97,7 @@ export const KanbanBoard = () => {
               onCancel={handleCloseModal} 
               onDelete={handleDeleteTask}
               defaultValues={editingTask} 
-              submitLabel="Save Changes" 
+              submitLabel={UI_TEXT.GLOBAL.SAVE_CHANGES} 
             />
             <div className="mt-0" />
           </Suspense>
@@ -106,7 +107,7 @@ export const KanbanBoard = () => {
       <Modal
         isOpen={modalState.mode === 'createColumn'}
         onClose={handleCloseModal}
-        title="Add New Column"
+        title={UI_TEXT.GLOBAL.create('New Column')}
       >
         <Suspense fallback={<FormLoader />}>
           <ColumnForm onSubmit={handleCreateColumn} onCancel={handleCloseModal} />

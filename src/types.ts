@@ -151,6 +151,11 @@ export interface ColumnFormProps {
   onCancel: () => void;
 }
 
+export interface ColumnFormData {
+  title: string;
+  color: string; // keyof typeof COLUMN_COLOR_VARIANTS is strictly 'string' in form data processing usually, but implies a constraint.
+}
+
 export interface TaskCardProps {
   task: Task;
   isOverdue: boolean;

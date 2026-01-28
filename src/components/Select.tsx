@@ -1,13 +1,11 @@
-import  { forwardRef, useMemo } from 'react';
+import  { forwardRef } from 'react';
 import { SELECT_STYLES } from '../constants/componentConfig';
 import type { SelectProps } from '../types';
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, error, options, className = '', ...props }, ref) => {
-    const selectClasses = useMemo(() => {
-      const stateClass = error ? SELECT_STYLES.error : SELECT_STYLES.normal;
-      return `${SELECT_STYLES.base} ${stateClass}`;
-    }, [error]);
+    const stateClass = error ? SELECT_STYLES.error : SELECT_STYLES.normal;
+    const selectClasses = `${SELECT_STYLES.base} ${stateClass}`;
     
     return (
       <div className={`relative ${className}`}>
