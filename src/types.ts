@@ -1,3 +1,5 @@
+import { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+
 // ==========================================
 // LABEL TYPES
 // ==========================================
@@ -59,14 +61,7 @@ export interface TaskFormData {
 // DRAG AND DROP TYPES
 // ==========================================
 
-export interface DragEndEvent {
-  active: {
-    id: string;
-  };
-  over: {
-    id: string;
-  } | null;
-}
+// Imported from @dnd-kit/core
 
 // ==========================================
 // MODAL TYPES
@@ -195,9 +190,9 @@ export interface BoardViewProps {
   tasksByColumn: { column: Column; tasks: Task[] }[];
   overdueTaskIds: Set<string>;
   activeTask: Task | null;
-  sensors: any; // From @dnd-kit/core
-  onDragStart: (event: any) => void;
-  onDragEnd: (event: any) => void;
+  sensors: any; 
+  onDragStart: (event: DragStartEvent) => void;
+  onDragEnd: (event: DragEndEvent) => void;
   onDragCancel: () => void;
   onTaskClick: (taskId: string) => void;
   onAddTask: (columnId: string) => void;
