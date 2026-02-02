@@ -44,6 +44,27 @@ export interface BoardState {
   tasks: Task[];
 }
 
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  isGuest: boolean;
+}
+
+export interface Board {
+  id: string;
+  title: string;
+  createdAt: number;
+}
+
+export interface BoardEntity {
+  id: string;
+  title: string;
+  columnIds: string[];
+  taskIds: string[]; // Or we can rely on task.boardId
+}
+
 // ==========================================
 // FORM TYPES
 // ==========================================

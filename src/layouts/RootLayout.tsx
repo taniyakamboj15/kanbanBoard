@@ -1,9 +1,13 @@
 import { Outlet, Link } from 'react-router-dom';
 import { ErrorBoundary } from '../error-boundary/ErrorBoundary';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { BoardSwitcher } from '../components/BoardSwitcher';
+import { AuthManager } from '../components/AuthManager';
+import { useAuthPersistence } from '../hooks/useAuthPersistence';
 
 
 export const RootLayout = () => {
+  useAuthPersistence();
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-gray-50/50 dark:bg-slate-950 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] transition-colors duration-300">
@@ -20,21 +24,19 @@ export const RootLayout = () => {
                   </div>
                   <div>
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight leading-none">Kanban Board</h1>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 font-medium mt-0.5">Manage your tasks efficiently</p>
                   </div>
                 </Link>
+                
+                <div className="h-6 w-px bg-gray-200 dark:bg-slate-700 mx-2" />
+                
+                <BoardSwitcher />
               </div>
 
               {/* Actions */}
               <div className="flex items-center gap-4">
+               <AuthManager />
                <ThemeToggle />
               </div>
-              
-              {/* Actions could go here, passed via Context or Props if needed globally */}
-              {/* For now, buttons are layout-specific, we can use an Outlet context or just render them in the page */}
-              {/* But wait, the previous design had the "Add Column" button in the header. */}
-              {/* To keep it simple for now, we'll let pages control the header extras via a Portal or just keep it simple. */}
-              
             </div>
           </div>
         </header>

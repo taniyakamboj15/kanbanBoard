@@ -59,6 +59,8 @@ export const COLUMN_COLOR_VARIANTS: Record<string, { bg: string; border: string;
 
 export const STORAGE_KEYS = {
   BOARD_STATE: 'kanban-board-state',
+  BOARDS_STATE: 'kanban-boards-v1', // Legacy/Default
+  AUTH_USER: 'kanban-auth-user',
 } as const;
 
 // ==========================================
@@ -125,5 +127,25 @@ export const UI_TEXT = {
     PRIORITY_LABEL: 'Priority',
     LABELS_LABEL: 'Labels',
     DELETE_TITLE: 'Delete Task',
+  },
+  AUTH: {
+    LOGIN: 'Login',
+    LOGOUT: 'Logout',
+    GUEST_MODE: 'Guest Mode',
+    GUEST_USER: 'Guest User',
+    LOGOUT_CONFIRM: 'Are you sure you want to logout?',
+    NAME_LABEL: 'Name',
+    NAME_PLACEHOLDER: 'Enter your name',
+    EMAIL_LABEL: 'Email',
+    EMAIL_PLACEHOLDER: 'Enter your email',
+    START_USING: 'Start Using Board',
+  },
+  BOARD_SWITCHER: {
+    SELECT_BOARD: 'Select Board',
+    CREATE_BOARD: 'Create new board',
+    CREATE_BOARD_PLACEHOLDER: 'Board name...',
+    CREATE: 'Create',
+    DELETE_BOARD_CONFIRM: 'Are you sure you want to delete this board?',
+    DELETE_BOARD_TOOLTIP: 'Delete board',
   },
 } as const;

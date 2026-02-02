@@ -1,37 +1,76 @@
-import { BoardState } from '../types';
+import { BoardSliceState } from '../store/reducers/boardSlice';
 import { STORAGE_KEYS } from '../constants';
-
+import { User } from '../types';
 
 export const storageService = {
-  saveBoard: (state: BoardState): void => {
+  // --- Board Persistence ---
+  
+  getBoardKey: (userId: string) => `kanban-boards-${userId}`,
+
+  saveBoards: (state: BoardSliceState, userId: string = 'guest'): void => {
     try {
+      const key = storageService.getBoardKey(userId);
       const serialized = JSON.stringify(state);
-      localStorage.setItem(STORAGE_KEYS.BOARD_STATE, serialized);
+      localStorage.setItem(key, serialized);
     } catch (err: unknown) {
-      const error = err as Error;
-      console.error('Failed to save board state:', error.message);
+      console.error('Failed to save boards state:', err);
     }
   },
 
-  loadBoard: (): BoardState | null => {
+  loadBoards: (userId: string = 'guest'): BoardSliceState | null => {
     try {
-      const serialized = localStorage.getItem(STORAGE_KEYS.BOARD_STATE);
-      if (!serialized) return null;
+      const key = storageService.getBoardKey(userId);
+      const serialized = localStorage.getItem(key);
       
-      return JSON.parse(serialized) as BoardState;
+      // Fallback to legacy key if guest and no new key exists (migration path)
+      if (!serialized && userId === 'guest') {
+        const legacy = localStorage.getItem(STORAGE_KEYS.BOARDS_STATE);
+        if (legacy) return JSON.parse(legacy) as BoardSliceState;
+      }
+
+      if (!serialized) return null;
+      return JSON.parse(serialized) as BoardSliceState;
     } catch (err: unknown) {
-      const error = err as Error;
-      console.error('Failed to load board state:', error.message);
+      console.error('Failed to load boards state:', err);
       return null;
     }
   },
 
-  clearBoard: (): void => {
+  clearBoards: (userId: string = 'guest'): void => {
     try {
-      localStorage.removeItem(STORAGE_KEYS.BOARD_STATE);
+      const key = storageService.getBoardKey(userId);
+      localStorage.removeItem(key);
     } catch (err: unknown) {
-      const error = err as Error;
-      console.error('Failed to clear board state:', error.message);
+      console.error('Failed to clear boards state:', err);
     }
   },
+
+  // --- Auth Persistence ---
+
+  saveUser: (user: User): void => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.AUTH_USER, JSON.stringify(user));
+    } catch (err) {
+      console.error('Failed to save user:', err);
+    }
+  },
+
+  loadUser: (): User | null => {
+    try {
+      const serialized = localStorage.getItem(STORAGE_KEYS.AUTH_USER);
+      if (!serialized) return null;
+      return JSON.parse(serialized) as User;
+    } catch (err) {
+      return null;
+    }
+  },
+
+  clearUser: (): void => {
+    localStorage.removeItem(STORAGE_KEYS.AUTH_USER);
+  },
+  
+  // Legacy stubs
+  saveBoard: () => {},
+  loadBoard: () => null,
+  clearBoard: () => {},
 };

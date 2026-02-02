@@ -4,7 +4,7 @@
 
 ## 📋 Description
 
-This project is a high-performance, strictly typed Kanban board application designed to streamline task management. It mimics the intuitive interface of Trello while enforcing enterprise-grade engineering standards. The application features a robust drag-and-drop interface, real-time local persistence, and a highly customizable UI that adapts to user workflow.
+This project is a high-performance, strictly typed Kanban board application designed to streamline task management. It mimics the intuitive interface of Trello while enforcing enterprise-grade engineering standards. The application features a robust drag-and-drop interface, real-time local persistence (now scoped per user), and a highly customizable UI that adapts to user workflow.
 
 ## 🎯 Use Cases
 
@@ -39,9 +39,16 @@ We are committed to inclusivity. This board is fully keyboard and screen-reader 
 - **Priority Badges**: Distinct badges for Low, Medium, High, and Urgent priorities.
 
 ### 4. Robust Persistence
-- **Local Storage**: State is automatically saved to the browser's local storage.
+- **User-Scoped Storage**: Data is saved to `localStorage` keyed by `User ID`, ensuring data isolation between users.
 - **Debounced Writes**: Optimized save logic (500ms debounce) prevents performance degradation during rapid updates.
-- **State Hydration**: The board instantly restores its previous state upon reloading the page.
+- **State Hydration**: The board instantly restores its previous state upon reloading the page or logging in.
+
+### 5. Multi-Board & Authentication (Simulated)
+- **User Authentication**: Support for Login, Logout, and Guest Mode.
+- **Multiple Boards**: Users can create, switch between, and manage multiple boards.
+- **Isolation**: Each user sees only their own set of boards and tasks.
+
+*Note: Authentication is currently simulated via LocalStorage. In a production environment with a backend, we would implement JWT Access Tokens with HTTP-Only Refresh Tokens for security.*
 
 ---
 
@@ -104,15 +111,17 @@ src/
 │       ├── KanbanBoard.tsx       # Main board controller
 │       └── useKanbanController.ts # Logic hook
 ├── hooks/             # Custom React hooks
-│   ├── useBoard.ts    # Board state operations
-│   └── useObverdueTasks.ts
+│   ├── useBoard.ts         # Board state operations
+│   ├── useAuthManager.ts   # Authentication logic
+│   └── useBoardSwitcher.ts # Board handling logic
 ├── store/             # Global State (Redux)
-│   └── kanbanSlice.ts # State reducer definitions
+│   ├── boardSlice.ts  # Multi-board state reducers
+│   └── authSlice.ts   # Authentication state
 ├── services/          # External Integrations
-│   └── storage.ts     # LocalStorage abstraction layer
+│   └── storage.ts     # LocalStorage abstraction layer (User-scoped)
 ├── types.ts           # Shared TypeScript interfaces
 ├── constants/         # Configuration & static text
-└── App.tsx            # Application root
+└── layouts/           # Page layouts (RootLayout)
 ```
 
 ## 🛡️ License

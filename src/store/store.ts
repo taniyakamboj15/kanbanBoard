@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import kanbanReducer from './reducers/kanbanSlice';
-
+import boardReducer from './reducers/boardSlice';
+import authReducer from './reducers/authSlice';
 
 export const store = configureStore({
   reducer: {
-    kanban: kanbanReducer,
+    board: boardReducer,
+    auth: authReducer,
   },
   devTools: import.meta.env.DEV,
 });
