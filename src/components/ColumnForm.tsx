@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { validationRules } from '../utils/validators';
 import { Button } from './Button';
 import { COLUMN_COLOR_VARIANTS, UI_TEXT } from '../constants';
 import type { ColumnFormProps, ColumnFormData } from '../types';
+import { CheckIcon } from '../assets/icons';
 
 export const ColumnForm = ({ onSubmit, onCancel }: ColumnFormProps) => {
   const {
@@ -36,7 +38,7 @@ export const ColumnForm = ({ onSubmit, onCancel }: ColumnFormProps) => {
           placeholder={UI_TEXT.COLUMN.NEW_TITLE_PLACEHOLDER}
           className="w-full px-4 py-2.5 bg-white text-gray-900 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all placeholder:text-gray-400 font-medium"
           autoFocus
-          {...register('title', { required: 'Title is required' })}
+          {...register('title', validationRules.columnTitle)}
         />
         {errors.title && (
           <p className="mt-1 text-xs text-red-500">{errors.title.message}</p>
@@ -53,16 +55,13 @@ export const ColumnForm = ({ onSubmit, onCancel }: ColumnFormProps) => {
               key={key}
               type="button"
               onClick={() => setValue('color', key as keyof typeof COLUMN_COLOR_VARIANTS)}
-              className={`group relative w-full aspect-square rounded-full border-2 transition-all flex items-center justify-center ${
-                selectedColor === key ? 'border-gray-900 scale-110' : 'border-transparent hover:scale-105'
-              }`}
+              className={`group relative w-full aspect-square rounded-full border-2 transition-all flex items-center justify-center ${selectedColor === key ? 'border-gray-900 scale-110' : 'border-transparent hover:scale-105'
+                }`}
               title={theme.label}
             >
               <div className={`w-full h-full rounded-full ${theme.swatch} border border-black/5 mx-auto`} />
               {selectedColor === key && (
-                <svg className="absolute w-4 h-4 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
+                <CheckIcon className="absolute w-4 h-4 text-gray-900" />
               )}
             </button>
           ))}
@@ -70,9 +69,9 @@ export const ColumnForm = ({ onSubmit, onCancel }: ColumnFormProps) => {
       </div>
 
       <div className="flex items-center justify-end space-x-3 pt-4 border-t border-gray-50">
-        <Button 
-          variant="outline" 
-          onClick={onCancel} 
+        <Button
+          variant="outline"
+          onClick={onCancel}
           type="button"
           className="hover:bg-gray-50 text-gray-600 border-gray-300"
         >

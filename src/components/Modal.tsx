@@ -4,6 +4,7 @@ import { useFocusTrap } from '../hooks/useFocusTrap';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { UI_TEXT } from '../constants';
 import type { ModalProps } from '../types';
+import { CloseIcon } from '../assets/icons';
 
 export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -21,14 +22,14 @@ export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
       role="dialog"
     >
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Modal Content */}
-      <div 
+      <div
         ref={modalRef}
         tabIndex={-1}
         className="relative bg-white dark:bg-slate-950 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all animate-in fade-in zoom-in-95 duration-200 border border-gray-100 dark:border-slate-900 flex flex-col focus:outline-none"
@@ -40,9 +41,7 @@ export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
             className="p-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
             aria-label={UI_TEXT.MODAL.CLOSE}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseIcon className="w-5 h-5" />
           </button>
         </div>
 
